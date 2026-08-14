@@ -332,7 +332,7 @@ A safe template should be maintained in:
 ## 1. Clone the repository
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/AbhiGradient/Flight_Ticket_Management
 cd Flight-Ticket-Management
 ```
 
@@ -701,10 +701,11 @@ Developed as an academic/software engineering project.
 Team members can be added here:
 
 ```text
-1. Name — Role
-2. Name — Role
-3. Name — Role
-4. Name — Role
+1. ABHISHEK SAPKALE — ORDINARY LABOUR
+2. SAUJAS SALUNKE — LEADER
+3. SARTH DANGE — LABOUR
+4. OM SHAHANE — LABOUR
+5. SOHAM RANADHIR — LABOUR
 ```
 
 ---
