@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/passenger-sidebar', { active: 'profile' }) %>
+
+<div class="main-content">
+  <h3 class="mb-3">My Profile</h3>
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+        <div class="user-avatar me-3" style="width:60px;height:60px;font-size:1.5rem"><%= user.name.charAt(0).toUpperCase() %></div>
+        <div>
+          <h5 class="mb-0"><%= user.name %></h5>
+          <small class="text-muted">Passenger Account</small>
+        </div>
+      </div>
+      <form action="/passenger/profile" method="POST">
+        <div class="mb-3"><label class="form-label">Full Name</label><input type="text" name="name" class="form-control" value="<%= user.name %>" required></div>
+        <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" value="<%= user.email %>" required></div>
+        <div class="mb-3"><label class="form-label">Phone</label><input type="text" name="phone" class="form-control" value="<%= user.phone || '' %>"></div>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Update Profile</button>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

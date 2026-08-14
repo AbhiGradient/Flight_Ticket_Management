@@ -1,0 +1,76 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/passenger-sidebar', { active: 'search' }) %>
+
+<div class="main-content">
+  <a href="/booking/seats/<%= flight.id %>" class="text-muted text-decoration-none mb-3 d-inline-block">
+    <i class="bi bi-arrow-left"></i> Back to seats
+  </a>
+  <div class="card">
+    <div class="card-header"><h5 class="mb-0"><i class="bi bi-person-vcard"></i> Passenger Details</h5></div>
+    <div class="card-body">
+      <div class="alert alert-light border mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <strong><%= flight.airline %> <%= flight.flight_number %></strong> |
+            <%= flight.source_city %> → <%= flight.dest_city %>
+          </div>
+          <div class="text-end">
+            <small>Seat: <strong class="text-primary"><%= seat.seat_number %></strong></small>
+            <h4 class="mb-0 text-primary">₹<%= flight.price.toLocaleString('en-IN') %></h4>
+          </div>
+        </div>
+      </div>
+
+      <form action="/booking/passenger-details" method="POST">
+        <input type="hidden" name="flightId" value="<%= flight.id %>">
+        <input type="hidden" name="seatId" value="<%= seat.id %>">
+        <input type="hidden" name="amount" value="<%= flight.price %>">
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Full Name *</label>
+            <input type="text" name="name" class="form-control" value="<%= data.name || user.name %>" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label">Age *</label>
+            <input type="number" name="age" class="form-control" min="1" max="120" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label">Gender *</label>
+            <select name="gender" class="form-select" required>
+              <option value="">Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Email *</label>
+            <input type="email" name="email" class="form-control" value="<%= data.email || user.email %>" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Phone *</label>
+            <input type="text" name="phone" class="form-control" required>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Journey Date *</label>
+          <input type="date" name="journey_date" class="form-control"
+                 value="<%= new Date(flight.departure_time).toISOString().split('T')[0] %>"
+                 min="<%= new Date().toISOString().split('T')[0] %>" required>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <a href="/booking/seats/<%= flight.id %>" class="btn btn-light">Back</a>
+          <button type="submit" class="btn btn-primary btn-lg">
+            Continue to Payment · <strong>₹<%= flight.price.toLocaleString('en-IN') %></strong>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

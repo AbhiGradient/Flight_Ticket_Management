@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<% if (error) { %>
+  <div class="container mt-4"><div class="alert alert-danger"><%= error %></div></div>
+<% } %>
+
+<div class="hero-banner">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg">
+          <div class="card-body p-5">
+            <h3 class="text-center mb-1">Create Account</h3>
+            <p class="text-center text-muted mb-4">Join FlightTicket for exclusive deals</p>
+            <form action="/register" method="POST">
+              <div class="mb-3">
+                <label class="form-label">Full Name *</label>
+                <input type="text" name="name" class="form-control" placeholder="John Doe" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email *</label>
+                <input type="email" name="email" class="form-control" placeholder="you@example.com" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input type="text" name="phone" class="form-control" placeholder="9876543210">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Password * (min 6 characters)</label>
+                <input type="password" name="password" class="form-control" placeholder="••••••" minlength="6" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Create Account</button>
+            </form>
+            <p class="text-center mt-3 mb-0 small text-muted">
+              Already have an account? <a href="/login" style="color:var(--primary)" class="fw-bold text-decoration-none">Sign in</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/admin-sidebar', { active: 'bookings' }) %>
+
+<div class="main-content">
+  <h3 class="mb-3">All Bookings</h3>
+  <div class="card">
+    <div class="card-body p-0">
+      <% if (bookings.length === 0) { %>
+        <div class="text-center text-muted py-5"><i class="bi bi-receipt display-1"></i><h5 class="mt-3">No bookings</h5></div>
+      <% } else { %>
+        <div class="table-responsive"><table class="table">
+          <thead><tr><th>PNR</th><th>User</th><th>Flight</th><th>Route</th><th>Journey</th><th>Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            <% bookings.forEach(b => { %>
+              <tr>
+                <td><strong><%= b.pnr %></strong></td>
+                <td><%= b.user_name %><br><small class="text-muted"><%= b.user_email %></small></td>
+                <td><%= b.flight_number %></td>
+                <td><%= b.source_city %> → <%= b.dest_city %></td>
+                <td><%= new Date(b.journey_date).toLocaleDateString() %></td>
+                <td>₹<%= b.total_amount %></td>
+                <td><span class="badge bg-<%= b.status==='confirmed'?'success':b.status==='cancelled'?'danger':'warning' %>"><%= b.status.toUpperCase() %></span></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table></div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

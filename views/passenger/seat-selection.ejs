@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/passenger-sidebar', { active: 'search' }) %>
+
+<div class="main-content">
+  <h3 class="mb-3">Select Your Seat</h3>
+  <div class="alert alert-light border"><strong><%= flight.airline %> <%= flight.flight_number %></strong> | <%= flight.source_city %> → <%= flight.dest_city %> | <strong class="text-primary">₹<%= flight.price %></strong></div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card"><div class="card-body text-center">
+        <div class="mb-3">
+          <span class="badge bg-success me-2">Available</span>
+          <span class="badge bg-secondary me-2">Booked</span>
+          <span class="badge" style="background:var(--primary)">Selected</span>
+        </div>
+        <div class="cockpit">✈ FRONT OF AIRCRAFT</div>
+        <% const rows = {}; seats.forEach(s => { const row = s.seat_number.match(/\d+/)[0]; if (!rows[row]) rows[row] = []; rows[row].push(s); }); %>
+        <% Object.keys(rows).sort((a,b)=>+a-+b).forEach(row => { %>
+          <div class="seat-row d-flex justify-content-center mb-1">
+            <% rows[row].forEach((seat, idx) => { %>
+              <% if (idx === 3) { %><div class="aisle"></div><% } %>
+              <% if (seat.is_available) { %>
+                <a href="/booking/passenger-details?flightId=<%= flight.id %>&seatId=<%= seat.id %>" class="seat available" title="Seat <%= seat.seat_number %>"><%= seat.seat_number %></a>
+              <% } else { %>
+                <span class="seat booked" title="Booked"><%= seat.seat_number %></span>
+              <% } %>
+            <% }) %>
+          </div>
+        <% }) %>
+      </div></div>
+    </div>
+    <div class="col-md-4">
+      <div class="card"><div class="card-body">
+        <h6 class="fw-bold">Trip Summary</h6>
+        <p class="mb-2 small"><strong>Flight:</strong><br><%= flight.airline %> <%= flight.flight_number %></p>
+        <p class="mb-2 small"><strong>From:</strong> <%= flight.source_city %></p>
+        <p class="mb-2 small"><strong>To:</strong> <%= flight.dest_city %></p>
+        <p class="mb-2 small"><strong>Departure:</strong> <%= new Date(flight.departure_time).toLocaleString() %></p>
+        <p class="mb-2 small"><strong>Duration:</strong> <%= flight.duration %></p>
+        <hr>
+        <p class="mb-1"><strong>Total:</strong> <span class="flight-price">₹<%= flight.price %></span></p>
+        <small class="text-muted">Click an available seat to continue.</small>
+      </div></div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

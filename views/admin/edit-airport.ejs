@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/admin-sidebar', { active: 'airports' }) %>
+
+<div class="main-content">
+  <h3 class="mb-3">Edit Airport</h3>
+  <div class="card">
+    <div class="card-body">
+      <form action="/admin/airports/edit/<%= airport.id %>" method="POST">
+        <div class="row">
+          <div class="col-md-6 mb-3"><label class="form-label">Code *</label><input type="text" name="code" class="form-control" value="<%= airport.code %>" required></div>
+          <div class="col-md-6 mb-3"><label class="form-label">Country *</label><input type="text" name="country" class="form-control" value="<%= airport.country %>" required></div>
+        </div>
+        <div class="mb-3"><label class="form-label">Airport Name *</label><input type="text" name="name" class="form-control" value="<%= airport.name %>" required></div>
+        <div class="mb-3"><label class="form-label">City *</label><input type="text" name="city" class="form-control" value="<%= airport.city %>" required></div>
+        <button type="submit" class="btn btn-warning"><i class="bi bi-check-circle"></i> Update</button>
+        <a href="/admin/airports" class="btn btn-light">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

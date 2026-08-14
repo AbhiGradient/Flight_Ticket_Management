@@ -1,0 +1,24 @@
+<aside class="sidebar">
+  <ul class="sidebar-menu">
+    <li class="sidebar-section-title">My Trip</li>
+    <li><a href="/passenger/dashboard" class="<%= typeof active !== 'undefined' && active === 'dashboard' ? 'active' : '' %>">
+      <i class="bi bi-speedometer2"></i> Dashboard
+    </a></li>
+    <li><a href="/passenger/search" class="<%= typeof active !== 'undefined' && active === 'search' ? 'active' : '' %>">
+      <i class="bi bi-search"></i> Search Flights
+    </a></li>
+    <li><a href="/passenger/all-flights" class="<%= typeof active !== 'undefined' && active === 'all-flights' ? 'active' : '' %>">
+      <i class="bi bi-airplane"></i> All Flights
+    </a></li>
+    <li><a href="/passenger/my-bookings" class="<%= typeof active !== 'undefined' && active === 'bookings' ? 'active' : '' %>">
+      <i class="bi bi-ticket-perforated"></i> My Bookings
+    </a></li>
+
+    <li class="sidebar-divider"></li>
+    <li class="sidebar-section-title">Account</li>
+    <li><a href="/passenger/profile" class="<%= typeof active !== 'undefined' && active === 'profile' ? 'active' : '' %>">
+      <i class="bi bi-person"></i> Profile
+    </a></li>
+    <li><a href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+  </ul>
+</aside>

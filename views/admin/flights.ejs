@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/admin-sidebar', { active: 'flights' }) %>
+
+<div class="main-content">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Manage Flights</h3>
+    <a href="/admin/flights/add" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add Flight</a>
+  </div>
+  <div class="card">
+    <div class="card-body p-0">
+      <% if (flights.length === 0) { %>
+        <div class="text-center text-muted py-5"><i class="bi bi-airplane display-1"></i><h5 class="mt-3">No flights yet</h5></div>
+      <% } else { %>
+        <div class="table-responsive"><table class="table">
+          <thead><tr><th>Flight</th><th>Airline</th><th>Route</th><th>Departure</th><th>Price</th><th>Seats</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody>
+            <% flights.forEach(f => { %>
+              <tr>
+                <td><strong><%= f.flight_number %></strong></td>
+                <td><%= f.airline %></td>
+                <td><%= f.source_city %> → <%= f.dest_city %></td>
+                <td><%= new Date(f.departure_time).toLocaleString() %></td>
+                <td>₹<%= f.price %></td>
+                <td><%= f.available_seats %>/<%= f.total_seats %></td>
+                <td><span class="badge bg-<%= f.status==='active'?'success':'danger' %>"><%= f.status %></span></td>
+                <td>
+                  <a href="/admin/flights/edit/<%= f.id %>" class="btn btn-sm btn-outline-warning">Edit</a>
+                  <a href="/admin/flights/delete/<%= f.id %>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete?')">Delete</a>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table></div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

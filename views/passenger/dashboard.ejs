@@ -1,0 +1,83 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/passenger-sidebar', { active: 'dashboard' }) %>
+
+<div class="main-content">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="mb-0">Welcome back, <%= user.name %>! 👋</h3>
+    <a href="/passenger/search" class="btn btn-primary"><i class="bi bi-search"></i> New Search</a>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(223,33,137,0.1); color:var(--primary);"><i class="bi bi-ticket-perforated"></i></div>
+        <div class="stat-value"><%= total %></div>
+        <div class="stat-label">Total Bookings</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(16,185,129,0.1); color:#10b981;"><i class="bi bi-check-circle"></i></div>
+        <div class="stat-value"><%= bookings.filter(b => b.status === 'confirmed').length %></div>
+        <div class="stat-label">Confirmed</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(245,158,11,0.1); color:#f59e0b;"><i class="bi bi-clock"></i></div>
+        <div class="stat-value"><%= bookings.filter(b => b.status === 'pending').length %></div>
+        <div class="stat-label">Pending</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(239,68,68,0.1); color:#ef4444;"><i class="bi bi-x-circle"></i></div>
+        <div class="stat-value"><%= bookings.filter(b => b.status === 'cancelled').length %></div>
+        <div class="stat-label">Cancelled</div>
+      </div>
+    </div>
+  </div>
+<div class="card-header d-flex justify-content-between align-items-center">
+  <h5 class="mb-0">Recent Bookings</h5>
+  <div>
+    <a href="/passenger/all-flights" class="btn btn-sm btn-outline-primary me-1">All Flights</a>
+    <a href="/passenger/my-bookings" class="btn btn-sm btn-primary">View All Bookings</a>
+  </div>
+</div>
+
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Recent Bookings</h5>
+      <a href="/passenger/my-bookings" class="btn btn-sm btn-primary">View All</a>
+    </div>
+    <div class="card-body p-0">
+      <% if (bookings.length === 0) { %>
+        <div class="text-center py-5 text-muted">
+          <i class="bi bi-inbox display-1"></i>
+          <h5 class="mt-3">No bookings yet</h5>
+          <a href="/passenger/search" class="btn btn-primary mt-2">Search Flights</a>
+        </div>
+      <% } else { %>
+        <div class="table-responsive">
+          <table class="table">
+            <thead><tr><th>PNR</th><th>Flight</th><th>Route</th><th>Journey Date</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody>
+              <% bookings.slice(0, 5).forEach(b => { %>
+                <tr>
+                  <td><strong><%= b.pnr %></strong></td>
+                  <td><%= b.airline %><br><small class="text-muted"><%= b.flight_number %></small></td>
+                  <td><%= b.source_city %> → <%= b.dest_city %></td>
+                  <td><%= new Date(b.journey_date).toLocaleDateString() %></td>
+                  <td>₹<%= b.total_amount %></td>
+                  <td><span class="badge bg-<%= b.status==='confirmed'?'success':b.status==='cancelled'?'danger':'warning' %>"><%= b.status.toUpperCase() %></span></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

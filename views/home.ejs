@@ -1,0 +1,72 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="hero-banner">
+  <div class="container text-center text-white py-4">
+    <h1>Find Your Perfect Flight</h1>
+    <p class="lead">Compare prices from 200+ airlines and book with confidence</p>
+  </div>
+</div>
+
+<div class="container" style="margin-top:-50px; position:relative; z-index:10;">
+  <div class="card shadow-lg">
+    <div class="card-body p-4">
+      <div class="search-tabs">
+        <div class="search-tab active"><i class="bi bi-airplane"></i> Flights</div>
+        <div class="search-tab text-muted" style="cursor:not-allowed"><i class="bi bi-building"></i> Hotels</div>
+        <div class="search-tab text-muted" style="cursor:not-allowed"><i class="bi bi-train-front"></i> Trains</div>
+      </div>
+      <form action="/passenger/search" method="POST" class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label small fw-bold"><i class="bi bi-geo-alt"></i> FROM</label>
+          <select name="source" class="form-select" required>
+            <option value="">Departure city</option>
+            <% if (typeof airports !== 'undefined' && airports) { airports.forEach(a => { %>
+              <option value="<%= a.id %>"><%= a.city %> (<%= a.code %>)</option>
+            <% }) } %>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label small fw-bold"><i class="bi bi-geo-alt-fill"></i> TO</label>
+          <select name="destination" class="form-select" required>
+            <option value="">Arrival city</option>
+            <% if (typeof airports !== 'undefined' && airports) { airports.forEach(a => { %>
+              <option value="<%= a.id %>"><%= a.city %> (<%= a.code %>)</option>
+            <% }) } %>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label small fw-bold"><i class="bi bi-calendar3"></i> DEPARTURE</label>
+          <input type="date" name="date" class="form-control" min="<%= new Date().toISOString().split('T')[0] %>" required>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+          <button type="submit" class="btn btn-primary w-100">
+            <i class="bi bi-search"></i> Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5">
+  <div class="row g-4">
+    <div class="col-md-4 text-center">
+      <i class="bi bi-lightning-charge-fill display-3" style="color:var(--secondary)"></i>
+      <h5 class="mt-3 fw-bold">Lightning Fast Booking</h5>
+      <p class="text-muted">Book your flight in under 60 seconds.</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <i class="bi bi-piggy-bank-fill display-3" style="color:var(--secondary)"></i>
+      <h5 class="mt-3 fw-bold">Unbeatable Prices</h5>
+      <p class="text-muted">Save more with exclusive deals and offers.</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <i class="bi bi-shield-fill-check display-3" style="color:var(--secondary)"></i>
+      <h5 class="mt-3 fw-bold">Trusted & Secure</h5>
+      <p class="text-muted">Your data is encrypted and never shared.</p>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

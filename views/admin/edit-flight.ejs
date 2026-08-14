@@ -1,0 +1,47 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/admin-sidebar', { active: 'flights' }) %>
+
+<div class="main-content">
+  <h3 class="mb-3">Edit Flight</h3>
+  <div class="card">
+    <div class="card-body">
+      <form action="/admin/flights/edit/<%= flight.id %>" method="POST">
+        <div class="row">
+          <div class="col-md-6 mb-3"><label class="form-label">Flight Number *</label><input type="text" name="flight_number" class="form-control" value="<%= flight.flight_number %>" required></div>
+          <div class="col-md-6 mb-3"><label class="form-label">Airline *</label><input type="text" name="airline" class="form-control" value="<%= flight.airline %>" required></div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3"><label class="form-label">Source *</label>
+            <select name="source_airport_id" class="form-select" required>
+              <% airports.forEach(a => { %><option value="<%= a.id %>" <%= a.id===flight.source_airport_id?'selected':'' %>><%= a.city %> (<%= a.code %>)</option><% }) %>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3"><label class="form-label">Destination *</label>
+            <select name="destination_airport_id" class="form-select" required>
+              <% airports.forEach(a => { %><option value="<%= a.id %>" <%= a.id===flight.destination_airport_id?'selected':'' %>><%= a.city %> (<%= a.code %>)</option><% }) %>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3"><label class="form-label">Departure *</label><input type="datetime-local" name="departure_time" class="form-control" value="<%= new Date(flight.departure_time).toISOString().slice(0,16) %>" required></div>
+          <div class="col-md-6 mb-3"><label class="form-label">Arrival *</label><input type="datetime-local" name="arrival_time" class="form-control" value="<%= new Date(flight.arrival_time).toISOString().slice(0,16) %>" required></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3"><label class="form-label">Duration *</label><input type="text" name="duration" class="form-control" value="<%= flight.duration %>" required></div>
+          <div class="col-md-3 mb-3"><label class="form-label">Price *</label><input type="number" name="price" class="form-control" step="0.01" value="<%= flight.price %>" required></div>
+          <div class="col-md-3 mb-3"><label class="form-label">Seats *</label><input type="number" name="total_seats" class="form-control" value="<%= flight.total_seats %>" required></div>
+          <div class="col-md-3 mb-3"><label class="form-label">Status *</label>
+            <select name="status" class="form-select" required>
+              <option value="active" <%= flight.status==='active'?'selected':'' %>>Active</option>
+              <option value="cancelled" <%= flight.status==='cancelled'?'selected':'' %>>Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-warning"><i class="bi bi-check-circle"></i> Update Flight</button>
+        <a href="/admin/flights" class="btn btn-light">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

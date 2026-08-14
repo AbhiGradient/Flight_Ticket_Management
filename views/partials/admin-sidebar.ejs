@@ -1,0 +1,32 @@
+<aside class="sidebar">
+  <ul class="sidebar-menu">
+    <li class="sidebar-section-title">Overview</li>
+    <li><a href="/admin/dashboard" class="<%= typeof active !== 'undefined' && active === 'dashboard' ? 'active' : '' %>">
+      <i class="bi bi-grid-1x2"></i> Dashboard
+    </a></li>
+
+    <li class="sidebar-divider"></li>
+    <li class="sidebar-section-title">Manage</li>
+    <li><a href="/admin/flights" class="<%= typeof active !== 'undefined' && active === 'flights' ? 'active' : '' %>">
+      <i class="bi bi-airplane"></i> Flights
+    </a></li>
+    <li><a href="/admin/airports" class="<%= typeof active !== 'undefined' && active === 'airports' ? 'active' : '' %>">
+      <i class="bi bi-building"></i> Airports
+    </a></li>
+    <li><a href="/admin/bookings" class="<%= typeof active !== 'undefined' && active === 'bookings' ? 'active' : '' %>">
+      <i class="bi bi-receipt"></i> Bookings
+    </a></li>
+    <li><a href="/admin/users" class="<%= typeof active !== 'undefined' && active === 'users' ? 'active' : '' %>">
+      <i class="bi bi-people"></i> Users
+    </a></li>
+
+    <li class="sidebar-divider"></li>
+    <li class="sidebar-section-title">Analytics</li>
+    <li><a href="/admin/reports" class="<%= typeof active !== 'undefined' && active === 'reports' ? 'active' : '' %>">
+      <i class="bi bi-graph-up-arrow"></i> Reports
+    </a></li>
+
+    <li class="sidebar-divider"></li>
+    <li><a href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+  </ul>
+</aside>

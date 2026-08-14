@@ -1,0 +1,43 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/admin-sidebar', { active: 'flights' }) %>
+
+<div class="main-content">
+  <h3 class="mb-3">Add New Flight</h3>
+  <div class="card">
+    <div class="card-body">
+      <form action="/admin/flights/add" method="POST">
+        <div class="row">
+          <div class="col-md-6 mb-3"><label class="form-label">Flight Number *</label><input type="text" name="flight_number" class="form-control" required></div>
+          <div class="col-md-6 mb-3"><label class="form-label">Airline *</label><input type="text" name="airline" class="form-control" required></div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3"><label class="form-label">Source *</label>
+            <select name="source_airport_id" class="form-select" required>
+              <option value="">Select</option>
+              <% airports.forEach(a => { %><option value="<%= a.id %>"><%= a.city %> (<%= a.code %>)</option><% }) %>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3"><label class="form-label">Destination *</label>
+            <select name="destination_airport_id" class="form-select" required>
+              <option value="">Select</option>
+              <% airports.forEach(a => { %><option value="<%= a.id %>"><%= a.city %> (<%= a.code %>)</option><% }) %>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3"><label class="form-label">Departure *</label><input type="datetime-local" name="departure_time" class="form-control" required></div>
+          <div class="col-md-6 mb-3"><label class="form-label">Arrival *</label><input type="datetime-local" name="arrival_time" class="form-control" required></div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3"><label class="form-label">Duration *</label><input type="text" name="duration" class="form-control" placeholder="2h 30m" required></div>
+          <div class="col-md-4 mb-3"><label class="form-label">Price (₹) *</label><input type="number" name="price" class="form-control" step="0.01" required></div>
+          <div class="col-md-4 mb-3"><label class="form-label">Total Seats *</label><input type="number" name="total_seats" class="form-control" value="60" required></div>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Add Flight</button>
+        <a href="/admin/flights" class="btn btn-light">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

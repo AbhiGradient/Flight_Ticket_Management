@@ -1,0 +1,61 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/passenger-sidebar', { active: 'search' }) %>
+
+<div class="main-content">
+  <a href="/passenger/search" class="text-muted text-decoration-none mb-3 d-inline-block">
+    <i class="bi bi-arrow-left"></i> Back to results
+  </a>
+
+  <div class="card">
+    <div class="card-body p-4">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+          <h4 class="mb-1"><%= flight.airline %></h4>
+          <small class="text-muted"><%= flight.flight_number %></small>
+        </div>
+        <div class="text-end">
+          <div class="flight-price">₹<%= flight.price %></div>
+          <small class="text-muted">per passenger</small>
+        </div>
+      </div>
+      <hr>
+      <div class="row text-center align-items-center my-4">
+        <div class="col-md-4">
+          <div class="flight-time"><%= new Date(flight.departure_time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) %></div>
+          <div class="flight-city"><%= flight.source_code %></div>
+          <div><%= flight.source_name %></div>
+          <small class="text-muted"><%= new Date(flight.departure_time).toLocaleDateString() %></small>
+        </div>
+        <div class="col-md-4">
+          <i class="bi bi-airplane-engines display-4" style="color:var(--primary)"></i>
+          <div class="text-muted small mt-2"><%= flight.duration %></div>
+        </div>
+        <div class="col-md-4">
+          <div class="flight-time"><%= new Date(flight.arrival_time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) %></div>
+          <div class="flight-city"><%= flight.dest_code %></div>
+          <div><%= flight.dest_name %></div>
+          <small class="text-muted"><%= new Date(flight.arrival_time).toLocaleDateString() %></small>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <h6 class="fw-bold">Fare Details</h6>
+          <p class="mb-1">Base fare: <strong>₹<%= flight.price %></strong></p>
+          <p class="text-muted small">Includes all taxes & fees</p>
+        </div>
+        <div class="col-md-6">
+          <h6 class="fw-bold">Availability</h6>
+          <p class="mb-1">Seats left: <strong class="text-success"><%= flight.available_seats %></strong> / <%= flight.total_seats %></p>
+        </div>
+      </div>
+      <div class="d-grid mt-4">
+        <a href="/booking/seats/<%= flight.id %>" class="btn btn-primary btn-lg">
+          <i class="bi bi-arrow-right-circle"></i> Book Now - Select Seat
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

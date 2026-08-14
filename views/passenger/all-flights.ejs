@@ -1,0 +1,113 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/passenger-sidebar', { active: 'all-flights' }) %>
+
+<div class="main-content">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0"><i class="bi bi-airplane"></i> All Available Flights</h3>
+    <span class="badge bg-primary fs-6"><%= flights.length %> flights</span>
+  </div>
+
+  <% if (flights.length === 0) { %>
+    <div class="card"><div class="card-body text-center py-5">
+      <i class="bi bi-airplane display-1 text-muted"></i>
+      <h5 class="mt-3">No flights available</h5>
+      <a href="/passenger/search" class="btn btn-primary mt-2">Search Flights</a>
+    </div></div>
+  <% } else { %>
+    <div class="card mb-3"><div class="card-body">
+      <div class="row g-2">
+        <div class="col-md-3"><small class="text-muted">Airline</small><br>
+          <select class="form-select form-select-sm" onchange="filterFlights('airline', this.value)">
+            <option value="">All Airlines</option>
+            <% [...new Set(flights.map(f => f.airline))].forEach(a => { %>
+              <option value="<%= a %>"><%= a %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-md-3"><small class="text-muted">From</small><br>
+          <select class="form-select form-select-sm" onchange="filterFlights('source', this.value)">
+            <option value="">All Cities</option>
+            <% [...new Set(flights.map(f => f.source_city))].forEach(c => { %>
+              <option value="<%= c %>"><%= c %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-md-3"><small class="text-muted">To</small><br>
+          <select class="form-select form-select-sm" onchange="filterFlights('dest', this.value)">
+            <option value="">All Cities</option>
+            <% [...new Set(flights.map(f => f.dest_city))].forEach(c => { %>
+              <option value="<%= c %>"><%= c %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-md-3"><small class="text-muted">Max Price</small><br>
+          <input type="number" class="form-control form-control-sm" placeholder="₹" oninput="filterFlights('price', this.value)">
+        </div>
+      </div>
+    </div></div>
+
+    <% flights.forEach(f => { %>
+      <div class="flight-result flight-card"
+           data-airline="<%= f.airline %>"
+           data-source="<%= f.source_city %>"
+           data-dest="<%= f.dest_city %>"
+           data-price="<%= f.price %>">
+        <div class="row align-items-center">
+          <div class="col-md-2">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-airplane-engines fs-3 me-2" style="color:var(--primary)"></i>
+              <div><strong><%= f.airline %></strong><br><small class="text-muted"><%= f.flight_number %></small></div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="text-center">
+                <div class="flight-time"><%= new Date(f.departure_time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) %></div>
+                <div class="flight-city"><%= f.source_code %> · <%= f.source_city %></div>
+              </div>
+              <div class="text-center flex-grow-1 px-3">
+                <i class="bi bi-arrow-right text-muted"></i>
+                <div class="text-muted small"><%= f.duration %></div>
+                <div class="text-muted" style="border-top:1px dashed #ccc;margin:5px 0"></div>
+                <small class="text-muted"><%= new Date(f.departure_time).toLocaleDateString() %></small>
+              </div>
+              <div class="text-center">
+                <div class="flight-time"><%= new Date(f.arrival_time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) %></div>
+                <div class="flight-city"><%= f.dest_code %> · <%= f.dest_city %></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 text-center">
+            <small class="text-muted d-block">From</small>
+            <div class="flight-price">₹<%= f.price %></div>
+            <small class="text-<%= f.available_seats > 10 ? 'success' : 'danger' %>">
+              <%= f.available_seats %> seats
+            </small>
+          </div>
+          <div class="col-md-3 text-end">
+            <a href="/flights/<%= f.id %>" class="btn btn-primary">View & Book</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  <% } %>
+</div>
+
+<script>
+function filterFlights(key, value) {
+  document.querySelectorAll('.flight-card').forEach(card => {
+    let show = true;
+    const airline = document.querySelector('select[onchange*="airline"]').value;
+    const source = document.querySelector('select[onchange*="source"]').value;
+    const dest = document.querySelector('select[onchange*="dest"]').value;
+    const price = document.querySelector('input[oninput*="price"]').value;
+    if (airline && card.dataset.airline !== airline) show = false;
+    if (source && card.dataset.source !== source) show = false;
+    if (dest && card.dataset.dest !== dest) show = false;
+    if (price && parseFloat(card.dataset.price) > parseFloat(price)) show = false;
+    card.style.display = show ? 'block' : 'none';
+  });
+}
+</script>
+<%- include('../partials/footer') %>

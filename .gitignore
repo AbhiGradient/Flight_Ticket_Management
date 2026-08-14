@@ -1,0 +1,477 @@
+# ============================================================
+# Flight Ticket Management System
+# Global .gitignore
+# ============================================================
+
+
+# ============================================================
+# ENVIRONMENT VARIABLES & SECRETS
+# ============================================================
+
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Local environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Secret / credential files
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# API / cloud credentials
+credentials.json
+service-account.json
+serviceAccount.json
+google-credentials.json
+firebase-adminsdk-*.json
+
+# Generic secret/config files
+secrets.json
+secret.json
+secrets/
+.secret/
+.private/
+.private/
+
+
+# ============================================================
+# NODE.JS / NPM
+# ============================================================
+
+node_modules/
+.npm/
+.npmrc
+
+# NPM debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Package manager caches
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/install-state.gz
+.yarn/build-state.yml
+.yarn/install-state/
+
+
+# ============================================================
+# LOGS
+# ============================================================
+
+logs/
+*.log
+*.log.*
+debug.log
+error.log
+combined.log
+access.log
+
+
+# ============================================================
+# BUILD / DIST / PRODUCTION OUTPUT
+# ============================================================
+
+dist/
+build/
+out/
+.output/
+.next/
+.nuxt/
+.svelte-kit/
+.vercel/
+.netlify/
+.serverless/
+.aws-sam/
+
+# Temporary compiled/generated files
+.tmp/
+temp/
+.tmp-build/
+.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+.stylelintcache
+
+
+# ============================================================
+# TEST / COVERAGE
+# ============================================================
+
+coverage/
+.nyc_output/
+*.lcov
+test-results/
+playwright-report/
+playwright/.cache/
+cypress/videos/
+cypress/screenshots/
+
+
+# ============================================================
+# DATABASE / LOCAL DATABASE FILES
+# ============================================================
+
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# MySQL dumps / backups generated locally
+*.dump
+*.bak
+*.backup
+
+# Ignore arbitrary SQL dumps/backups
+*.sql.bak
+*.sql.backup
+*.sql.dump
+
+# IMPORTANT:
+# Your actual project database schema is intentionally tracked:
+# database/database.sql
+#
+# Do NOT add *.sql here because that would ignore your main
+# database/database.sql file.
+
+
+# ============================================================
+# USER UPLOADS / GENERATED FILES
+# ============================================================
+
+# Temporary uploaded files
+uploads/
+temp_uploads/
+tmp_uploads/
+user_uploads/
+uploaded_files/
+
+# Generated receipts/tickets/reports
+generated/
+generated_files/
+generated_reports/
+receipts/
+tickets/
+reports/
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+*.swp
+*.swo
+
+
+# ============================================================
+# OPERATING SYSTEM FILES
+# ============================================================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# Windows installer leftovers
+*.msi
+*.msix
+*.exe.tmp
+
+
+# ============================================================
+# VS CODE
+# ============================================================
+
+.vscode/*
+!.vscode/settings.json.example
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# VS Code local history
+.history/
+
+# If you don't want ANY .vscode files in Git,
+# replace the above with:
+# .vscode/
+
+
+# ============================================================
+# JETBRAINS / INTELLIJ / WEBSTORM
+# ============================================================
+
+.idea/
+*.iml
+*.iws
+*.ipr
+
+
+# ============================================================
+# VISUAL STUDIO
+# ============================================================
+
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+
+# ============================================================
+# PYTHON (IN CASE YOU USE PYTHON TOOLS/SCRIPTS)
+# ============================================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+.venv/
+venv/
+env/
+ENV/
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.tox/
+.nox/
+
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+Pipfile.lock
+poetry.lock
+
+
+# ============================================================
+# JAVA / GRADLE / MAVEN
+# ============================================================
+
+.gradle/
+build/
+target/
+*.class
+
+# ============================================================
+# REACT / NEXT.JS / FRONTEND
+# ============================================================
+
+# React
+.react/
+
+# Next.js
+.next/
+.next/cache/
+
+# Vite
+.vite/
+
+# Astro
+.astro/
+
+# Angular
+.angular/
+.angular/cache/
+
+
+# ============================================================
+# SERVERLESS / CLOUD
+# ============================================================
+
+.serverless/
+.aws-sam/
+.sam/
+.vercel/
+.netlify/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Pulumi
+.pulumi/
+
+
+# ============================================================
+# DOCKER
+# ============================================================
+
+# Local Docker environment files
+docker-compose.override.yml
+docker-compose.local.yml
+
+# Docker volumes / local data
+.docker-data/
+docker-data/
+
+# Docker secrets
+docker-secrets/
+secrets/
+
+
+# ============================================================
+# API TESTING TOOLS
+# ============================================================
+
+# Postman local/environment secrets
+postman-local/
+postman-secrets/
+*.postman_environment.local.json
+
+# Insomnia
+.insomnia/
+
+
+# ============================================================
+# SECURITY / SCANNING OUTPUT
+# ============================================================
+
+.nmap/
+security-reports/
+zap-reports/
+burp/
+*.har
+
+
+# ============================================================
+# GENERATED DOCUMENTS
+# ============================================================
+
+# Generated PDFs / Excel exports / temporary reports
+export/
+exports/
+*.generated.pdf
+*.generated.xlsx
+*.generated.csv
+
+
+# ============================================================
+# BACKUP / RECOVERY FILES
+# ============================================================
+
+*.old
+*.orig
+*.backup
+*.bak
+*.save
+*.swp
+*.swo
+
+# Backup directories
+backup/
+backups/
+_backup/
+
+
+# ============================================================
+# ARCHIVES
+# ============================================================
+
+# Usually don't commit generated archives
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+
+
+# ============================================================
+# LOCAL DEVELOPMENT
+# ============================================================
+
+.local/
+.local-data/
+.local-storage/
+.runtime/
+.runtime-data/
+
+# PID files
+*.pid
+*.pid.lock
+
+# Socket files
+*.sock
+
+
+# ============================================================
+# AI / COPILOT / LOCAL TOOLING
+# ============================================================
+
+.aider/
+.cursor/
+.cursorrules.local
+.claude/
+.cline/
+
+# Local AI/model files
+models/
+*.gguf
+*.bin
+
+
+# ============================================================
+# MISCELLANEOUS GENERATED FILES
+# ============================================================
+
+*.orig
+*.rej
+*.patch~
+*.bak
+*.temp
+*.tmp
+
+# OS / editor lock files
+*.lock.tmp
+
+# Crash dumps
+*.dmp
+*.stackdump
+
+
+# ============================================================
+# KEEP IMPORTANT PROJECT FILES
+# ============================================================
+
+# Example environment file SHOULD be committed
+# .env.example
+# .env.sample
+
+# Your real database schema SHOULD be committed
+# database/database.sql
+
+# README SHOULD be committed
+# README.md

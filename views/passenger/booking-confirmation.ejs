@@ -1,0 +1,62 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<%- include('../partials/passenger-sidebar', { active: 'bookings' }) %>
+
+<div class="main-content">
+  <div class="card text-center">
+    <div class="card-body p-5">
+      <div class="mb-3">
+        <i class="bi bi-check-circle-fill" style="font-size:5rem;color:#10b981"></i>
+      </div>
+      <h2 class="mb-2 text-success">Payment Successful!</h2>
+      <p class="text-muted">Your booking has been confirmed and e-ticket sent to your email.</p>
+
+      <div class="alert alert-light border text-start my-4">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <small class="text-muted">PNR Number</small>
+            <h4 class="text-primary mb-0"><%= booking.pnr %></h4>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <small class="text-muted">Amount Paid</small>
+            <h4 class="text-success mb-0">₹<%= parseFloat(booking.total_amount).toLocaleString('en-IN') %></h4>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <p class="mb-2"><strong>Flight</strong></p>
+            <p class="mb-1"><%= booking.airline %> <%= booking.flight_number %></p>
+            <p class="mb-1 text-muted small"><%= booking.source_city %> → <%= booking.dest_city %></p>
+          </div>
+          <div class="col-md-6">
+            <p class="mb-2"><strong>Departure</strong></p>
+            <p class="mb-1"><%= new Date(booking.departure_time).toLocaleString() %></p>
+            <p class="mb-0 text-muted small">Duration: <%= booking.duration %></p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-4">
+            <small class="text-muted">Passenger</small>
+            <p class="mb-0"><%= passengers[0] ? passengers[0].name : booking.user_name %></p>
+          </div>
+          <div class="col-md-4">
+            <small class="text-muted">Seat</small>
+            <p class="mb-0"><strong class="text-primary"><%= booking.seat_number || 'N/A' %></strong></p>
+          </div>
+          <div class="col-md-4">
+            <small class="text-muted">Status</small>
+            <p class="mb-0"><span class="badge bg-success">CONFIRMED</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-grid gap-2 d-md-block">
+        <a href="/passenger/my-bookings" class="btn btn-primary btn-lg">View My Bookings</a>
+        <a href="/passenger/all-flights" class="btn btn-outline-secondary">Book Another Flight</a>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>
