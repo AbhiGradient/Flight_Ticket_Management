@@ -698,15 +698,16 @@ The project architecture and database foundation are being established first, fo
 
 Developed as an academic/software engineering project.
 
-Team members can be added here:
+### Team Members
 
 ```text
-1. ABHISHEK SAPKALE — ORDINARY LABOUR
-2. SAUJAS SALUNKE — LEADER
-3. SARTH DANGE — LABOUR
-4. OM SHAHANE — LABOUR
-5. SOHAM RANADHIR — LABOUR
+1. ABHISHEK SAPKALE  — @AbhiGradient      — ORDINARY LABOUR
+2. SAUJAS SALUNKE    — @Saujas-Salunke    — LEADER
+3. SARTH DANGE       — @Sarth-Dange       — LABOUR
+4. OM SHAHANE        — @Om_shahane        — LABOUR
+5. SOHAM RANADHIR    — @burdenn           — LABOUR
 ```
+
 
 ---
 
